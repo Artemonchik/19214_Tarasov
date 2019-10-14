@@ -48,6 +48,7 @@ elem' :: (Eq a) => [a] -> a -> Bool
 elem' [] element = False
 elem' (x:xs) element = if x == element then True else elem' xs element
 
+filter' :: (a -> Bool) -> [a] -> [a]
 filter' test xs = foldl (\ acc elem -> if test elem then elem:acc else acc) [] xs
 
 map':: (a -> b) -> [a] -> [b]
