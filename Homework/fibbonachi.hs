@@ -1,3 +1,3 @@
-fact n = case n of 1 -> 1
-                   2 -> 2
-                   _ -> 5 -- _ нужен сам факт наличия значения, не важно какого
+fibonachi 0 = 1
+fibonachi 1 = 1
+fibonachi a = fibonachi (a - 1) + fibonachi (a - 2)

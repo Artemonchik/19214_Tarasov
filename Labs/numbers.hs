@@ -17,12 +17,12 @@ getLetterFromInteger integer | integer >= 0 && integer <= 9 = chr (fromIntegral 
 toDecimal :: Integer -> String -> String
 toDecimal 1 snumber | all (=='1') snumber = show $ length snumber 
                     | otherwise = error "invalid characters for this base"
-toDecimal base snumber | base >= 1 && base <= 61 = show (answer intArr $ length intArr)
+
+toDecimal base snumber | base >= 1 && base <= 61 = show (answer intArr)
                        | otherwise = error "base is invalid"
-                          where intArr = map getIntegerFromLetter snumber 
-                                answer [] _ = 0  
-                                answer (x:intArr) power | x < base = x * (base ^ (power - 1)) + answer intArr (power - 1)
-                                                   | otherwise =  error "char is not valid for this base"
+                          where intArr = map getIntegerFromLetter snumber
+                                answer intArr | all( < base) intArr = foldl (\prev curr -> curr + prev * base) 0 intArr 
+                                                  | otherwise =  error "char is not valid for this base"
 
 fromDecimal::Integer -> String -> String
 fromDecimal 1 snumber | any (\char -> ord char < 48 || ord char > 57) snumber = error "incorrect number"
