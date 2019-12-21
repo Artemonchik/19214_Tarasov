@@ -2,7 +2,7 @@ import Data.List
 type Name = String
 data Song = Song Name deriving(Show)
 data Album = Album Name [Song] deriving(Show)-- MusicianGroup
-data Performer = Performer Name MusicianGroup deriving(Show)
+data Performer = Performer Name (Maybe MusicianGroup) deriving(Show)
 data MusicianGroup = MusicianGroup Name [Album] deriving(Show) -- [Performer]
 
 type Password = String

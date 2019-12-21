@@ -15,19 +15,22 @@ getLetterFromInteger integer | integer >= 0 && integer <= 9 = chr (fromIntegral 
                              | otherwise = error "this integer can\'t be represented as char"
 
 toDecimal :: Integer -> String -> String
-toDecimal 1 snumber | all (=='1') snumber = show $ length snumber 
+toDecimal 1 "" = "0"
+toDecimal 1 snumber | all (=='1') snumber = show $ length snumber - 1
                     | otherwise = error "invalid characters for this base"
 
 toDecimal base snumber | base >= 1 && base <= 61 = show (answer intArr)
                        | otherwise = error "base is invalid"
                           where intArr = map getIntegerFromLetter snumber
                                 answer intArr | all( < base) intArr = foldl (\prev curr -> curr + prev * base) 0 intArr 
-                                                  | otherwise =  error "char is not valid for this base"
+                                              | otherwise =  error "char is not valid for this base"
+isNotDigit:: Char -> Bool 
+isNotDigit char =  ord char < 48 || ord char > 57
 
 fromDecimal::Integer -> String -> String
-fromDecimal 1 snumber | any (\char -> ord char < 48 || ord char > 57) snumber = error "incorrect number"
+fromDecimal 1 snumber | any isNotDigit snumber = error "incorrect number"
                       | otherwise = replicate (read snumber) '1'
-fromDecimal toBase snumber | any (\char -> ord char < 48 || ord char > 57) snumber = error "incorrect number"
+fromDecimal toBase snumber | any isNotDigit snumber = error "incorrect number"
                            | toBase <= 61 && toBase > 1 = map getLetterFromInteger (answer number [])
                            | otherwise = error "invalid base"
                             where 
