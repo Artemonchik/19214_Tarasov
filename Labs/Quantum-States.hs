@@ -20,7 +20,7 @@ instance (Num a) => Num (Complex a) where
     abs (Complex r i) = Complex (abs r) (abs i)
     signum (Complex r i) = Complex (signum r) (signum i)
     negate (Complex r1 i1) = Complex (-r1) (-i1)
-    fromInteger int = Complex (fromIntegral int) 0
+    fromInteger int = Complex (fromInteger int) 0
 
 data QuantumState a = QuantumState {
     complex :: Complex a,
